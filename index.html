@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blooming Roses - I Love You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(45deg, #ff6b9d, #ffa8cc, #ff9a9e, #fecfef);
+            background-size: 400% 400%;
+            animation: gradientShift 6s ease infinite;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Main Love Message */
+        .love-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .love-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 12vw, 8rem);
+            color: #ffffff;
+            text-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(255, 107, 157, 0.6),
+                0 0 60px rgba(255, 107, 157, 0.4),
+                2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: heartbeat 2s ease-in-out infinite, glow 3s ease-in-out infinite alternate;
+            margin-bottom: 20px;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes glow {
+            0% { 
+                text-shadow: 
+                    0 0 20px rgba(255, 255, 255, 0.8),
+                    0 0 40px rgba(255, 107, 157, 0.6),
+                    0 0 60px rgba(255, 107, 157, 0.4),
+                    2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            100% { 
+                text-shadow: 
+                    0 0 30px rgba(255, 255, 255, 1),
+                    0 0 60px rgba(255, 107, 157, 0.8),
+                    0 0 90px rgba(255, 107, 157, 0.6),
+                    2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        .subtitle {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
+            color: #ffffff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+            animation: fadeInOut 4s ease-in-out infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Rose Container */
+        .roses-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Individual Rose */
+        .rose {
+            position: absolute;
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite, rotate 8s linear infinite;
+        }
+
+        .rose:nth-child(odd) {
+            animation-direction: reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Falling Petals */
+        .petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .petal {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #ff6b9d, #ff9a9e);
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Blooming Flowers */
+        .flower {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            animation: bloom 3s ease-in-out infinite;
+        }
+
+        .flower::before {
+            content: '🌸';
+            font-size: 60px;
+            position: absolute;
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes bloom {
+            0%, 100% { transform: scale(0.8); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Hearts Animation */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 20px;
+            animation: heartFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Sparkles */
+        .sparkle {
+            position: absolute;
+            color: #ffffff;
+            font-size: 16px;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Garden Background Elements */
+        .garden-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .garden-flower {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.3;
+            animation: sway 4s ease-in-out infinite;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* Click Effect */
+        .click-effect {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
+            animation: ripple 0.6s ease-out;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .love-text {
+                font-size: clamp(2rem, 10vw, 5rem);
+            }
+            .subtitle {
+                font-size: clamp(1rem, 3vw, 1.8rem);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Garden Background -->
+    <div class="garden-bg" id="gardenBg"></div>
+
+    <!-- Main Love Message -->
+    <div class="love-message">
+        <div class="love-text">I Love You</div>
+        <div class="subtitle">Forever and Always ♥</div>
+    </div>
+
+    <!-- Roses Container -->
+    <div class="roses-container" id="rosesContainer"></div>
+
+    <!-- Falling Petals -->
+    <div class="petals-container" id="petalsContainer"></div>
+
+    <!-- Hearts Container -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <script>
+        // Create roses across the screen
+        function createRoses() {
+            const container = document.getElementById('rosesContainer');
+            const roseEmojis = ['🌹', '🥀', '🌺', '🌻', '🌷', '🌸', '💐'];
+            
+            for (let i = 0; i < 50; i++) {
+                const rose = document.createElement('div');
+                rose.className = 'rose';
+                rose.textContent = roseEmojis[Math.floor(Math.random() * roseEmojis.length)];
+                rose.style.left = Math.random() * 100 + '%';
+                rose.style.top = Math.random() * 100 + '%';
+                rose.style.animationDelay = Math.random() * 6 + 's';
+                rose.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                container.appendChild(rose);
+            }
+        }
+
+        // Create falling petals
+        function createPetals() {
+            const container = document.getElementById('petalsContainer');
+            
+            setInterval(() => {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                petal.style.animationDelay = Math.random() * 2 + 's';
+                
+                // Random petal colors
+                const colors = [
+                    'radial-gradient(circle, #ff6b9d, #ff9a9e)',
+                    'radial-gradient(circle, #ffa8cc, #fecfef)',
+                    'radial-gradient(circle, #ff9a9e, #fad0c4)',
+                    'radial-gradient(circle, #ffffff, #ffeaf3)'
+                ];
+                petal.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                container.appendChild(petal);
+                
+                // Remove petal after animation
+                setTimeout(() => {
+                    if (petal.parentNode) {
+                        petal.parentNode.removeChild(petal);
+                    }
+                }, 5000);
+            }, 200);
+        }
+
+        // Create floating hearts
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                
+                container.appendChild(heart);
+                
+                // Remove heart after animation
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.parentNode.removeChild(heart);
+                    }
+                }, 8000);
+            }, 1000);
+        }
+
+        // Create garden background flowers
+        function createGardenFlowers() {
+            const container = document.getElementById('gardenBg');
+            const flowers = ['🌺', '🌻', '🌷', '🌸', '🏵️', '💮'];
+            
+            for (let i = 0; i < 30; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'garden-flower';
+                flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+                flower.style.left = Math.random() * 100 + '%';
+                flower.style.top = Math.random() * 100 + '%';
+                flower.style.animationDelay = Math.random() * 4 + 's';
+                container.appendChild(flower);
+            }
+        }
+
+        // Create sparkles on click
+        function createSparkles(x, y) {
+            const sparkles = ['✨', '⭐', '💫', '🌟', '✦', '✧'];
+            
+            for (let i = 0; i < 5; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+                sparkle.style.left = (x + Math.random() * 60 - 30) + 'px';
+                sparkle.style.top = (y + Math.random() * 60 - 30) + 'px';
+                sparkle.style.animationDelay = Math.random() * 0.5 + 's';
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    if (sparkle.parentNode) {
+                        sparkle.parentNode.removeChild(sparkle);
+                    }
+                }, 2000);
+            }
+        }
+
+        // Click effect
+        function createClickEffect(x, y) {
+            const effect = document.createElement('div');
+            effect.className = 'click-effect';
+            effect.style.left = (x - 50) + 'px';
+            effect.style.top = (y - 50) + 'px';
+            document.body.appendChild(effect);
+            
+            setTimeout(() => {
+                if (effect.parentNode) {
+                    effect.parentNode.removeChild(effect);
+                }
+            }, 600);
+        }
+
+        // Event listeners
+        document.addEventListener('click', (e) => {
+            createClickEffect(e.clientX, e.clientY);
+            createSparkles(e.clientX, e.clientY);
+        });
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            createRoses();
+            createGardenFlowers();
+            createPetals();
+            createHearts();
+        });
+
+        // Add more roses periodically
+        setInterval(() => {
+            const container = document.getElementById('rosesContainer');
+            if (container.children.length < 100) {
+                const rose = document.createElement('div');
+                rose.className = 'rose';
+                const roseEmojis = ['🌹', '🥀', '🌺', '🌻', '🌷', '🌸', '💐'];
+                rose.textContent = roseEmojis[Math.floor(Math.random() * roseEmojis.length)];
+                rose.style.left = Math.random() * 100 + '%';
+                rose.style.top = Math.random() * 100 + '%';
+                rose.style.animationDelay = Math.random() * 6 + 's';
+                container.appendChild(rose);
+            }
+        }, 3000);
+
+        // Dynamic text color change
+        setInterval(() => {
+            const loveText = document.querySelector('.love-text');
+            const colors = [
+                '#ffffff',
+                '#ffeef8',
+                '#ffe0f0',
+                '#fff0f8',
+                '#ffebf5'
+            ];
+            loveText.style.color = colors[Math.floor(Math.random() * colors.length)];
+        }, 3000);
+    </script>
+</body>
+</html>
